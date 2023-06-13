@@ -48,6 +48,7 @@ public class Mapa {
             for (int i = 0; i < matrizMapa.length; i++) {
                 for (int j = 0; j < matrizMapa.length; j++) {
                     matrizMapa[i][0] = '0';
+                    grafo.adicionarAresta(i, j);
                 }
             }
 
