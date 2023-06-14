@@ -13,7 +13,7 @@ public class Mapa {
     public Mapa() {
 
         try {
-            Scanner sc = new Scanner(new File("exemplos/mapa3.txt"));
+            Scanner sc = new Scanner(new File("exemplos/mapa1.txt"));
             String linhaUm = sc.nextLine();
             String[] arrayLinhaUm = (linhaUm.split(" "));
 
