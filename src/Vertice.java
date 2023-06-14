@@ -11,10 +11,6 @@ public class Vertice {
         this.caracter = caracter;
     }
 
-    public int obterCoordenada(Vertice v) {
-        return this.linha + this.coluna;
-    }
-
     public int getIndice() {
         return this.indice;
     }

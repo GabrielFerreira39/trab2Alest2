@@ -35,7 +35,16 @@ public class Dijkstra {
                 }
             }
         }
-        imprimirResultado(g);
+
+    }
+
+    public int getDistancia(int destino) {
+        int distancia = this.distancia[destino];
+        if (distancia == Integer.MAX_VALUE) {
+            throw new RuntimeException("Não existe caminho entre os vértices");
+        }
+        return distancia;
+
     }
 
     public void imprimirResultado(Grafo g) {

@@ -3,6 +3,8 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Mapa {
+    private int numeroDeLinhas;
+    private int numeroDeColunas;
     private Grafo grafo;
     private Vertice[] vertices;
     private Vertice[] pontos1a9 = new Vertice[9];
@@ -10,16 +12,12 @@ public class Mapa {
 
     public Mapa() {
         try {
-            Scanner sc = new Scanner(new File("exemplos/mapa0.txt"));
+            Scanner sc = new Scanner(new File("exemplos/mapa_500_1000.txt"));
             String linhaUm = sc.nextLine();
             String[] arrayLinhaUm = (linhaUm.split(" "));
 
-            int numeroDeColunas = Integer.parseInt(arrayLinhaUm[1]);
-            int numeroDeLinhas = Integer.parseInt(arrayLinhaUm[0]);
-
-            for (int i = 0; i < arrayLinhaUm.length; i++) {
-                System.out.println(arrayLinhaUm[i]);
-            }
+            this.numeroDeColunas = Integer.parseInt(arrayLinhaUm[1]);
+            this.numeroDeLinhas = Integer.parseInt(arrayLinhaUm[0]);
 
             matrizMapa = new char[numeroDeLinhas][numeroDeColunas];
             vertices = new Vertice[numeroDeLinhas * numeroDeColunas];
@@ -44,21 +42,65 @@ public class Mapa {
                     }
                 }
             }
-
-            for (int i = 0; i < matrizMapa.length; i++) {
-                for (int j = 0; j < matrizMapa.length; j++) {
-                    matrizMapa[i][0] = '0';
-                    grafo.adicionarAresta(i, j);
-                }
-            }
-
-            int origem = pontos1a9[0].getIndice();
-            Dijkstra dijkstra = new Dijkstra(grafo, origem);
-            dijkstra.imprimirResultado(grafo);
         } catch (FileNotFoundException fnfe) {
             System.out.println("Arquivo não encontrado!");
         } catch (Exception e) {
             System.out.println(e);
         }
+
+        Grafo grafo = new Grafo(numeroDeColunas * numeroDeLinhas);
+
+        ligar(grafo, numeroDeLinhas, numeroDeColunas);
+
+        int ondeEstou = 0;
+        int ondeVou = ondeEstou + 1;
+        int[] novasDistancias = new int[9];
+        int maisLonginquo = 0;
+
+        for (int i = 0; i < pontos1a9.length; i++) {
+            Dijkstra inicio = new Dijkstra(grafo, pontos1a9[ondeEstou].getIndice());
+            try {
+                int d = inicio.getDistancia(pontos1a9[ondeVou].getIndice());
+                ondeEstou = ondeVou;
+                maisLonginquo = ondeEstou;
+                novasDistancias[ondeVou] = d;
+                ondeVou++;
+
+            } catch (Exception ofb) {
+                ondeVou++;
+            }
+
+        }
+        Dijkstra fim = new Dijkstra(grafo, pontos1a9[maisLonginquo].getIndice());
+        int d = fim.getDistancia(pontos1a9[0].getIndice());
+        novasDistancias[0] = d;
+
+        for (int j = 0; j < novasDistancias.length; j++) {
+            System.out.println(novasDistancias[j]);
+        }
+
     }
+
+    public void ligar(Grafo grafo, int numeroDeLinhas, int numeroDeColunas) {
+        for (int i = 0; i < numeroDeLinhas; i++) {
+            for (int j = 0; j < numeroDeColunas; j++) {
+                if (matrizMapa[i][j] == '*') {
+                    continue;
+                }
+                if (i > 0 && matrizMapa[i - 1][j] != '*') {
+                    grafo.adicionarAresta(i * numeroDeColunas + j, (i - 1) * numeroDeColunas + j);
+                }
+                if (i < numeroDeLinhas - 1 && matrizMapa[i + 1][j] != '*') {
+                    grafo.adicionarAresta(i * numeroDeColunas + j, (i + 1) * numeroDeColunas + j);
+                }
+                if (j > 0 && matrizMapa[i][j - 1] != '*') {
+                    grafo.adicionarAresta(i * numeroDeColunas + j, i * numeroDeColunas + j - 1);
+                }
+                if (j < numeroDeColunas - 1 && matrizMapa[i][j + 1] != '*') {
+                    grafo.adicionarAresta(i * numeroDeColunas + j, i * numeroDeColunas + j + 1);
+                }
+            }
+        }
+    }
+
 }

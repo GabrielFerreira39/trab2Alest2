@@ -15,9 +15,11 @@ public class Grafo {
     }
 
     public void adicionarAresta(int v, int w) {
-        listaAdjacencia[v].add(w);
-        listaAdjacencia[w].add(v);
-        numeroArestas++;
+        if (!existeAresta(v, w)) {
+            listaAdjacencia[v].add(w);
+            listaAdjacencia[w].add(v);
+            numeroArestas++;
+        }
     }
 
     public boolean existeAresta(int v, int w) {
@@ -65,7 +67,7 @@ public class Grafo {
     }
 
     public int getNumeroVertices() {
-        return 0;
+        return this.numeroVertices;
     }
 
 }
