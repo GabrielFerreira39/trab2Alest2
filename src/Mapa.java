@@ -11,8 +11,9 @@ public class Mapa {
     private char[][] matrizMapa;
 
     public Mapa() {
+
         try {
-            Scanner sc = new Scanner(new File("exemplos/mapa_500_1000.txt"));
+            Scanner sc = new Scanner(new File("exemplos/mapa3.txt"));
             String linhaUm = sc.nextLine();
             String[] arrayLinhaUm = (linhaUm.split(" "));
 
@@ -75,10 +76,14 @@ public class Mapa {
         int d = fim.getDistancia(pontos1a9[0].getIndice());
         novasDistancias[0] = d;
 
+        int somatorio = 0;
+
         for (int j = 0; j < novasDistancias.length; j++) {
             System.out.println(novasDistancias[j]);
-        }
+            somatorio += novasDistancias[j];
 
+        }
+        System.out.println("Somatório: " + somatorio);
     }
 
     public void ligar(Grafo grafo, int numeroDeLinhas, int numeroDeColunas) {
