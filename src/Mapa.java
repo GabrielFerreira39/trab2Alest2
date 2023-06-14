@@ -78,11 +78,20 @@ public class Mapa {
 
         int somatorio = 0;
 
-        for (int j = 0; j < novasDistancias.length; j++) {
-            System.out.println(novasDistancias[j]);
-            somatorio += novasDistancias[j];
+        for (int j = 1; j < novasDistancias.length; j++) {
+            int distanciaJ = novasDistancias[j];
+            if (distanciaJ == Integer.MAX_VALUE) {
+                System.out.println("Não é possível chegar ao ponto " + j);
+            } else {
+                System.out.println("A distancia do ponto " + j + " é: " + distanciaJ);
+                somatorio += novasDistancias[j];
+            }
 
         }
+
+        System.out.println("A distancia do ponto 0 é: " + novasDistancias[0]);
+        somatorio += novasDistancias[0];
+
         System.out.println("Somatório: " + somatorio);
     }
 
