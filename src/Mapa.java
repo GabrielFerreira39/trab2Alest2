@@ -13,7 +13,7 @@ public class Mapa {
     public Mapa() {
 
         try {
-            Scanner sc = new Scanner(new File("exemplos/mapa4.txt"));
+            Scanner sc = new Scanner(new File("exemplos/mapa_15_80.txt"));
             String linhaUm = sc.nextLine();
             String[] arrayLinhaUm = (linhaUm.split(" "));
 
@@ -91,7 +91,7 @@ public class Mapa {
         System.out.println("A distancia do ponto 0 é: " + novasDistancias[0]);
         somatorio += novasDistancias[0];
 
-        System.out.println("Somatório: " + somatorio);
+        System.out.println("Combustível total gasto: " + somatorio);
     }
 
     public void ligar(Grafo grafo, int numeroDeLinhas, int numeroDeColunas) {
