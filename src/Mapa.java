@@ -13,7 +13,7 @@ public class Mapa {
     public Mapa() {
 
         try {
-            Scanner sc = new Scanner(new File("exemplos/mapa1.txt"));
+            Scanner sc = new Scanner(new File("exemplos/mapa4.txt"));
             String linhaUm = sc.nextLine();
             String[] arrayLinhaUm = (linhaUm.split(" "));
 
@@ -66,7 +66,6 @@ public class Mapa {
                 maisLonginquo = ondeEstou;
                 novasDistancias[ondeVou] = d;
                 ondeVou++;
-
             } catch (Exception ofb) {
                 ondeVou++;
             }
@@ -80,10 +79,10 @@ public class Mapa {
 
         for (int j = 1; j < novasDistancias.length; j++) {
             int distanciaJ = novasDistancias[j];
-            if (distanciaJ == Integer.MAX_VALUE) {
-                System.out.println("Não é possível chegar ao ponto " + j);
+            if (distanciaJ == 0) {
+                System.out.println("Não é possível chegar ao porto " + (j + 1));
             } else {
-                System.out.println("A distancia do ponto " + j + " é: " + distanciaJ);
+                System.out.println("A distancia do porto " + (j + 1) + " é: " + distanciaJ);
                 somatorio += novasDistancias[j];
             }
 
