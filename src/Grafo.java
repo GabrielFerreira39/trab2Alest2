@@ -53,6 +53,10 @@ public class Grafo {
         return resultado;
     }
 
+    public int getNumeroVertices() {
+        return this.numeroVertices;
+    }
+
     @Override
     public String toString() {
         String ret = "";
@@ -64,10 +68,6 @@ public class Grafo {
             ret = ret + " } " + System.lineSeparator();
         }
         return ret;
-    }
-
-    public int getNumeroVertices() {
-        return this.numeroVertices;
     }
 
 }
